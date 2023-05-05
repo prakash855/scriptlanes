@@ -77,7 +77,7 @@ export default function CustomizedDialogs({ open, handleClose }) {
             4.Sorting via columns like vaccine & Available Capacity
           </Typography>
           <Typography gutterBottom>
-            5.Proper message when data is not found for perticular date
+            5.Proper message when data is not found for particular date
           </Typography>
           <Typography gutterBottom>
             5.Table depicted with data like No, Name, Vaccine, Available
