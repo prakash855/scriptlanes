@@ -11,7 +11,7 @@ import {
 import Sort from "./Sort";
 import Slot from "./Slot";
 
-export default function BasicTable({ centers, onSort }) {
+export default function BasicTable({ centers }) {
   function createData(name, vaccine, availableCapacity, slots) {
     return { name, vaccine, availableCapacity, slots };
   }
@@ -37,10 +37,10 @@ export default function BasicTable({ centers, onSort }) {
                   Name
                 </TableCell>
                 <TableCell size="small" align="right">
-                  Vaccine <Sort sortBy="vaccine" onSort={onSort} />
+                  Vaccine <Sort sortBy="vaccine" />
                 </TableCell>
                 <TableCell size="small" align="right">
-                  Available Capacity <Sort sortBy="capacity" onSort={onSort} />
+                  Available Capacity <Sort sortBy="capacity" />
                 </TableCell>
                 <TableCell size="small" align="right">
                   Slots

@@ -1,48 +1,26 @@
-import axios from "axios";
-import { useState } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import Table from "./components/Table";
 import "./App.css";
-import { API } from "./baseURL";
-import { currentDate, filterHandler, sortHandler } from "./utils";
+import { currentDate } from "./utils";
 import CustomizedDialogs from "./components/FeatureModal";
+import { useCenters } from "./context/centers-context";
 
 function App() {
-  const [dateInput, setDateInput] = useState("");
-  const [centers, setCenters] = useState([]);
-  const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState({ type: "", isSorted: false });
-  const [isRequested, setIsRequested] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const {
-        data: { centers },
-      } = await axios.get(`${API}${dateInput.split("-").reverse().join("-")}`);
-      setCenters(centers);
-      setIsRequested(true);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const getSortedBy = (type, isSorted) => {
-    setSortBy({ type, isSorted });
-  };
-  const filteredItems = filterHandler(centers, search);
-
-  const sortedCenters = sortHandler(filteredItems, sortBy);
+  const {
+    dateInput,
+    setDateInput,
+    centers,
+    search,
+    setSearch,
+    isRequested,
+    open,
+    handleClickOpen,
+    handleClose,
+    handleSubmit,
+    sortedCenters,
+  } = useCenters();
 
   return (
     <div className="App">
@@ -84,7 +62,7 @@ function App() {
           </Button>
         </div>
       </div>
-      {centers && <Table centers={sortedCenters} onSort={getSortedBy} />}
+      {centers && <Table centers={sortedCenters} />}
       {isRequested && sortedCenters.length === 0 && (
         <Typography
           sx={{ textAlign: "center", color: "#9E230C" }}
