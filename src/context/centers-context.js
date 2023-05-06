@@ -29,7 +29,7 @@ const CentersContext = ({ children }) => {
     try {
       const {
         data: { centers },
-      } = await axios.get(`${API}${dateInput.split("-").reverse().join("-")}`);
+      } = await axios(`${API}${dateInput.split("-").reverse().join("-")}`);
       setCenters(centers);
       setIsRequested(true);
     } catch (e) {
